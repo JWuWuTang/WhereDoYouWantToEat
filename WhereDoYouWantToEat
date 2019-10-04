@@ -1,0 +1,17 @@
+#The goal of this program is to randomly select a place to eat or hang out
+#Ultimately want to expand to take into account number of people, location, family/friends, cuisine
+#Would be nice to eventually output a Yelp link and be based off of your location
+
+import random
+meal = input("Please input whether you want lunch, dinner, or dessert:") #User selects option
+upperMeal = meal.upper() #Make input uppercase so that when using if and elif, easy to identify
+lunchDict = {"Uroko Cafe", "The Marketplace", "Aloha Hawaiian BBQ"} #Lunch places
+dinnerDict = {"Cava Grill", "Panini Kebab Grill", "Souplantation"}
+dessertDict = {"7 Leaves Boba", "Yogurtland", "Omomo"}
+
+if (upperMeal == "LUNCH"):
+    print(random.choice(list(lunchDict))) #Randomly selects from the lunchDict
+elif (upperMeal == "DINNER"):
+    print(random.choice(list(dinnerDict))) #Randomly selects from the dinnerDict
+elif (upperMeal == "DESSERT"):
+    print(random.choice(list(dessertDict))) #Randomly selects from the dessertDict
