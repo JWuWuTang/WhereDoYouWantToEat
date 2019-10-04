@@ -32,13 +32,13 @@ elif (upperMeal == "BOBA"):
     boba = (random.choice(list(bobaDict))) #Randomly selects from the bobaDict
     params = {'term':boba,'location':location}
 elif (upperMeal == "DESSERT"):
-    dessert = (random.choice(list(dessertDict)))
+    dessert = (random.choice(list(dessertDict))) #Randomly selects from the dessertDict
     params = {'term':dessert,'location':location}
 
 req=requests.get(url, params=params, headers=headers)
 parsed = json.loads(req.text)
 businesses = parsed["businesses"]
-print(businesses[0]["name"])
-print(businesses[0]["url"])
+print(businesses[0]["name"]) #Name of first business on Yelp search
+print(businesses[0]["url"]) #URL of first business on Yelp search
 
 
