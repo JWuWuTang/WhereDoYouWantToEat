@@ -14,31 +14,38 @@ api_key = 'YUKgPwxqs5mnCzcqhCJ530soX7QuT5ch_Qe0d5Qp1w2qyzMOz3E4Io6mfxvsvj0Mlgby3
 headers = {'Authorization': 'Bearer %s' % api_key}
 url='https://api.yelp.com/v3/businesses/search'
 
-meal = input("Please input whether you want lunch, dinner, boba, or dessert:") #User selects option
-location = input("Please input what city you are in:")
-upperMeal = meal.upper() #Make input uppercase so that when using if and elif, easy to identify
-lunchDict = {"Uroko Cafe", "The Marketplace", "Aloha Hawaiian BBQ", "University Town Center"} #Lunch places
-dinnerDict = {"Cava Grill", "Panini Kebab Grill", "Souplantation"} #Dinner places
-bobaDict = {"7 Leaves", "Tastea", "Omomo", "HNTea"} #Boba places
-dessertDict = {"Yogurtland", "Saffron and Rose", "Fill Bakeshop and Creamery" }
+meal = ""
+while  meal.upper() != 'Q': 
+    meal = input("Please input whether you want: \n L - lunch\n D - dinner\n B - boba\n E - dessert\n Q - Quit\n\n I want to eat: ") #User selects option
+    upperMeal = meal.upper() #Make input uppercase so that when using if and elif, easy to identify
+    if (upperMeal == "QUIT" or upperMeal == "Q"):
+        break
+    location = input("Please input what city you are in:")
+    lunchDict = {"Uroko Cafe", "The Marketplace", "Aloha Hawaiian BBQ", "University Town Center"} #Lunch places
+    dinnerDict = {"Cava Grill", "Panini Kebab Grill", "Souplantation"} #Dinner places
+    bobaDict = {"7 Leaves", "Tastea", "Omomo", "HNTea"} #Boba places
+    dessertDict = {"Yogurtland", "Saffron and Rose", "Fill Bakeshop and Creamery" }
 
-if (upperMeal == "LUNCH"):
-    lunch = (random.choice(list(lunchDict))) #Randomly selects from the lunchDict
-    params = {'term':lunch,'location':location} #Sets parameters to randomly selected business and searches based off location
-elif (upperMeal == "DINNER"):
-    dinner = (random.choice(list(dinnerDict))) #Randomly selects from the dinnerDict
-    params = {'term':dinner,'location':location}
-elif (upperMeal == "BOBA"):
-    boba = (random.choice(list(bobaDict))) #Randomly selects from the bobaDict
-    params = {'term':boba,'location':location}
-elif (upperMeal == "DESSERT"):
-    dessert = (random.choice(list(dessertDict))) #Randomly selects from the dessertDict
-    params = {'term':dessert,'location':location}
-
-req=requests.get(url, params=params, headers=headers)
-parsed = json.loads(req.text)
-businesses = parsed["businesses"]
-print(businesses[0]["name"]) #Name of first business on Yelp search
-print(businesses[0]["url"]) #URL of first business on Yelp search
+    if (upperMeal == "LUNCH" or upperMeal == "L"):
+        lunch = (random.choice(list(lunchDict))) #Randomly selects from the lunchDict
+        params = {'term':lunch,'location':location} #Sets parameters to randomly selected business and searches based off location
+    elif (upperMeal == "DINNER" or upperMeal == "D"):
+        dinner = (random.choice(list(dinnerDict))) #Randomly selects from the dinnerDict
+        params = {'term':dinner,'location':location}
+    elif (upperMeal == "BOBA" or upperMeal == "B"):
+        boba = (random.choice(list(bobaDict))) #Randomly selects from the bobaDict
+        params = {'term':boba,'location':location}
+    elif (upperMeal == "DESSERT" or upperMeal == "E"):
+        dessert = (random.choice(list(dessertDict))) #Randomly selects from the dessertDict
+        params = {'term':dessert,'location':location}
+    else:
+        print("Please Enter a Valid Option")
+        break
+    
+    req=requests.get(url, params=params, headers=headers)
+    parsed = json.loads(req.text)
+    businesses = parsed["businesses"]
+    print(businesses[0]["name"]) #Name of first business on Yelp search
+    print(businesses[0]["url"]) #URL of first business on Yelp search
 
 
