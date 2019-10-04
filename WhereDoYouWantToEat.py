@@ -17,8 +17,10 @@ url='https://api.yelp.com/v3/businesses/search'
 meal = ""
 while  meal.upper() != 'Q': 
     meal = input("Please input whether you want: \n L - lunch\n D - dinner\n B - boba\n E - dessert\n Q - Quit\n\n I want to eat: ") #User selects option
-    location = input("Please input what city you are in:")
     upperMeal = meal.upper() #Make input uppercase so that when using if and elif, easy to identify
+    if (upperMeal == "QUIT" or upperMeal == "Q"):
+        break
+    location = input("Please input what city you are in:")
     lunchDict = {"Uroko Cafe", "The Marketplace", "Aloha Hawaiian BBQ", "University Town Center"} #Lunch places
     dinnerDict = {"Cava Grill", "Panini Kebab Grill", "Souplantation"} #Dinner places
     bobaDict = {"7 Leaves", "Tastea", "Omomo", "HNTea"} #Boba places
@@ -36,8 +38,6 @@ while  meal.upper() != 'Q':
     elif (upperMeal == "DESSERT" or upperMeal == "E"):
         dessert = (random.choice(list(dessertDict))) #Randomly selects from the dessertDict
         params = {'term':dessert,'location':location}
-    elif (upperMeal == "QUIT" or upperMeal == "Q"):
-        break
     else:
         print("Please Enter a Valid Option")
         break
